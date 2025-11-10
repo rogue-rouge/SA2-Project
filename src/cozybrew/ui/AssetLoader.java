@@ -59,10 +59,13 @@ public class AssetLoader {
 
     private void loadButtonIcons() {
         try {
-            this.sugarCubeIcon = new ImageIcon(getClass().getResource("/resources/img/sugar_cube.png"));
+            ImageIcon originalIcon = new ImageIcon(getClass().getResource("/resources/img/sugar_cube.png"));
+            
+            this.sugarCubeIcon = scaleIcon(originalIcon, 64, 64);
+
         } catch (Exception e) {
             System.err.println("Failed to load /resources/img/sugar_cube.png. Using placeholder.");
-            this.sugarCubeIcon = createPlaceholderIcon("Icon", 32, 32);
+            this.sugarCubeIcon = createPlaceholderIcon("Icon", 64, 64);
         }
     }
     
@@ -90,5 +93,14 @@ public class AssetLoader {
         g2d.drawString(text, 5, height / 2);
         g2d.dispose();
         return new ImageIcon(img);
+    }
+    
+        private ImageIcon scaleIcon(ImageIcon icon, int width, int height) {
+        if (icon == null || icon.getImage() == null) {
+            return null;
+        }
+        Image img = icon.getImage();
+        Image scaledImg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        return new ImageIcon(scaledImg);
     }
 }
