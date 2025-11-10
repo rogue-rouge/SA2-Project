@@ -12,6 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import cozybrew.logic.TimerLogic;
 
 public class BrewPanel extends JPanel {
     private JLabel brewingAnimationLabel;
