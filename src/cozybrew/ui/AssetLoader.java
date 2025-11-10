@@ -28,9 +28,9 @@ public class AssetLoader {
 
     private void loadBackgroundImage() {
         try {
-            this.backgroundImage = ImageIO.read(getClass().getResource("/cozybrew/img/brewbg.png"));
+            this.backgroundImage = ImageIO.read(getClass().getResource("/resources/img/brewbg.png"));
         } catch (Exception e) {
-            System.err.println("Failed to load /cozybrew/img/brewbg.png. Using fallback gradient.");
+            System.err.println("Failed to load /resources/img/brewbg.png. Using fallback gradient.");
             e.printStackTrace();
             this.backgroundImage = null;
         }
@@ -47,7 +47,7 @@ public class AssetLoader {
         this.animationFrames = new ImageIcon[frameNames.length];
         
         for (int i = 0; i < frameNames.length; i++) {
-            String path = "/cozybrew/img/" + frameNames[i];
+            String path = "/resources/img/" + frameNames[i];
             try {
                 this.animationFrames[i] = new ImageIcon(getClass().getResource(path));
             } catch (Exception e) {
@@ -59,9 +59,9 @@ public class AssetLoader {
 
     private void loadButtonIcons() {
         try {
-            this.sugarCubeIcon = new ImageIcon(getClass().getResource("/cozybrew/img/sugar_cube.png"));
+            this.sugarCubeIcon = new ImageIcon(getClass().getResource("/resources/img/sugar_cube.png"));
         } catch (Exception e) {
-            System.err.println("Failed to load /cozybrew/img/sugar_cube.png. Using placeholder.");
+            System.err.println("Failed to load /resources/img/sugar_cube.png. Using placeholder.");
             this.sugarCubeIcon = createPlaceholderIcon("Icon", 32, 32);
         }
     }
