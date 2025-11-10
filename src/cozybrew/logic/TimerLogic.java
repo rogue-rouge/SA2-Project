@@ -5,13 +5,14 @@
 package cozybrew.core;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import cozybrew.ui.AnimationController;
+
 /**
  *
  * @author Rosalie Joy Indelible Vicente
  */
+
 public class TimerLogic implements ActionListener {
     private int remainingSeconds;
     private JLabel displayLabel;
