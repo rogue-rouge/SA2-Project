@@ -43,20 +43,19 @@ public class TimerLogic implements ActionListener, TimerEngine {
     }
 
     @Override
-    public void startTimer(int totalSeconds) {
-        stopTimer();
-        this.remainingSeconds = totalSeconds;
-        updateDisplay();
-        animationController.startAnimation(totalSeconds);
-        swingTimer.start();
+    public void start() {
+        if (remainingSeconds > 0 && !isRunning) {
+            isRunning = true; // Set running state
+            animationController.startAnimation(remainingSeconds);
+            swingTimer.start();
+        }
     }
-
     @Override
-    public void stopTimer() {
+    public void stop() {
         if (isRunning) {
             swingTimer.stop();
             isRunning = false;
-            setToIdle();
+            setToIdle(); 
             for (TimerListener listener : listeners) {
                 listener.onFinish();
             }
@@ -92,7 +91,7 @@ public class TimerLogic implements ActionListener, TimerEngine {
                 listener.onTick(remainingSeconds);
                 }
         } else {
-            stopTimer();
+            stop();
             timerFinished();
         }
     }
@@ -124,7 +123,6 @@ public class TimerLogic implements ActionListener, TimerEngine {
     }
 
     public void setToIdle() {
-        stopTimer();
         isRunning = false;
         remainingSeconds = 0;
         initialDuration = 0;
