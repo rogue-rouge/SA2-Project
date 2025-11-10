@@ -20,12 +20,11 @@ public class MainFrame extends JFrame {
         super("CozyBrew Timer");
 
         this.brewPanel = new BrewPanel();
-
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(600, 400);
+        this.setSize(960, 540); 
         this.setLocationRelativeTo(null);
         this.setContentPane(brewPanel);
-
+        this.setResizable(false);
         this.setVisible(true);
     }
 }
