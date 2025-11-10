@@ -6,7 +6,6 @@ package cozybrew.main;
 
 import javax.swing.*;
 
-
 /**
  *
  * @author GROUP 3: JOHANES KINNARD COTE, MACAYLE THERESE DANCEL, MARY KIRSTEN DANIELLE IGUET, NESTOR JOSH BACANI, & ROSALIE JOY VICENTE

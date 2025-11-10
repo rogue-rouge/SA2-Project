@@ -6,7 +6,7 @@ package cozybrew.ui.panels;
 
 /**
  *
- * @author Kirs Iguet
+ * @author GROUP 3: JOHANES KINNARD COTE, MACAYLE THERESE DANCEL, MARY KIRSTEN DANIELLE IGUET, NESTOR JOSH BACANI, & ROSALIE JOY VICENTE
  */
 
 import javax.swing.*;
