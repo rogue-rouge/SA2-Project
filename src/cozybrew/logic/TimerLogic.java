@@ -7,17 +7,23 @@ package cozybrew.logic;
 import javax.swing.*;
 import java.awt.event.*;
 import cozybrew.ui.AnimationController;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Rosalie Joy Indelible Vicente
  */
 
-public class TimerLogic implements ActionListener {
+public class TimerLogic implements ActionListener, TimerEngine {
     private int remainingSeconds;
+    private int initialDuration;
     private JLabel displayLabel;
     private Timer swingTimer;
     private AnimationController animationController;
+    private boolean isRunning = false;
+
+    private List<TimerListener> listeners = new ArrayList<>();
 
     public TimerLogic(JLabel displayLabel, AnimationController animationController) {
         this.displayLabel = displayLabel;
@@ -27,6 +33,16 @@ public class TimerLogic implements ActionListener {
         setToIdle();
     }
 
+    @Override
+    public void setDurationSeconds(int totalSeconds) {
+        if (!isRunning) {
+            this.initialDuration = totalSeconds;
+            this.remainingSeconds = totalSeconds;
+            updateDisplay();
+        }
+    }
+
+    @Override
     public void startTimer(int totalSeconds) {
         stopTimer();
         this.remainingSeconds = totalSeconds;
@@ -35,10 +51,31 @@ public class TimerLogic implements ActionListener {
         swingTimer.start();
     }
 
+    @Override
     public void stopTimer() {
-        if (swingTimer != null && swingTimer.isRunning()) {
+        if (isRunning) {
             swingTimer.stop();
+            isRunning = false;
+            setToIdle();
+            for (TimerListener listener : listeners) {
+                listener.onFinish();
+            }
         }
+    }
+
+    @Override
+    public void addTimerListener(TimerListener listener) {
+        listeners.add(listener);
+    }
+
+    @Override
+    public void removeTimerListener(TimerListener listener) {
+        listeners.remove(listener);
+    }
+
+    @Override
+    public boolean isRunning() {
+        return this.isRunning;
     }
 
     @Override
@@ -51,6 +88,9 @@ public class TimerLogic implements ActionListener {
             remainingSeconds--;
             updateDisplay();
             animationController.updateFrame(remainingSeconds);
+                for (TimerListener listener : listeners) {
+                listener.onTick(remainingSeconds);
+                }
         } else {
             stopTimer();
             timerFinished();
@@ -75,12 +115,19 @@ public class TimerLogic implements ActionListener {
         int minutes = remainingSeconds / 60;
         int seconds = remainingSeconds % 60;
         String timeString = String.format("%02d:%02d", minutes, seconds);
-        displayLabel.setText(timeString);
+        if (isRunning) {
+            displayLabel.setText("<html><div style='text-align: center;'>Brewing...<br>" + timeString + "</div></html>");
+        } else if (initialDuration > 0) {
+            String presetTime = String.format("%02d:%02d", initialDuration / 60, initialDuration % 60);
+            displayLabel.setText("<html><div style='text-align: center;'>Ready to Brew<br>" + presetTime + "</div></html>");
+        }
     }
 
     public void setToIdle() {
         stopTimer();
+        isRunning = false;
         remainingSeconds = 0;
+        initialDuration = 0;
         displayLabel.setText("<html><div style='text-align: center;'>Cozy Brew<br>Select a preset</div></html>");
         animationController.setToIdle();
     }
