@@ -4,10 +4,21 @@
  */
 package cozybrew.main;
 
+import javax.swing.*;
+
 /**
  *
  * @author Rosalie Joy Indelible Vicente
  */
+
 public class CozyBrewApp {
-    
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new MainFrame();
+            }
+        });
+    }
 }
