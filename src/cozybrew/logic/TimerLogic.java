@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  *
- * @author Rosalie Joy Indelible Vicente
+ * @author GROUP 3: JOHANES KINNARD COTE, MACAYLE THERESE DANCEL, MARY KIRSTEN DANIELLE IGUET, NESTOR JOSH BACANI, & ROSALIE JOY VICENTE
  */
 
 public class TimerLogic implements ActionListener, TimerEngine {
