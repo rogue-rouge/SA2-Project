@@ -52,17 +52,17 @@ public class BrewPanel extends JPanel {
 
         // Center animation panel
         this.animationDisplayPanel = new AnimationDisplayPanel(brewingAnimationLabel);
-        this.animationDisplayPanel.setBounds(330, 100, 300, 300);
+        this.animationDisplayPanel.setBounds(330, 100, 300, 350);
         this.add(animationDisplayPanel);
         
         // Left presets panel
         this.presetsPanel = new PresetsPanel(timerEngine);
-        this.presetsPanel.setBounds(40, 60, 180, 420);
+        this.presetsPanel.setBounds(70, 70, 180, 400);
         this.add(presetsPanel);
 
         // Right start/stop panel
         this.startStopPanel = new StartStopPanel(timerEngine);
-        this.startStopPanel.setBounds(740, 160, 180, 180);
+        this.startStopPanel.setBounds(710, 180, 180, 150);
         this.add(startStopPanel);
 
         // Bottom-right sugar cube button
@@ -72,7 +72,7 @@ public class BrewPanel extends JPanel {
         sugarCubeButton.setContentAreaFilled(false);
         sugarCubeButton.setBorderPainted(false);
         sugarCubeButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        sugarCubeButton.setBounds(850, 430, 64, 64); 
+        sugarCubeButton.setBounds(826, 406, 64, 84);
         this.add(sugarCubeButton);
     }
 
