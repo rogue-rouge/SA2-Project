@@ -21,14 +21,12 @@ public class BrewPanel extends JPanel {
     private JButton sugarCubeButton;
 
     private TimerEngine timerEngine;
-    private TimerLogic timerLogic;
     private AnimationController animationController;
     private AssetLoader assetLoader;
 
     private PresetsPanel presetsPanel;
     private StartStopPanel startStopPanel;
     private AnimationDisplayPanel animationDisplayPanel;
-    private JLabel brewingAnimationLabel; 
 
     public BrewPanel() {
         this.setLayout(null);
@@ -109,4 +107,3 @@ public class BrewPanel extends JPanel {
         }
     }
 }
-
