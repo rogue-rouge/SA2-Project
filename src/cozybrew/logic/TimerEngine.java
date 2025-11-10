@@ -1,4 +1,4 @@
-package testcontrolsmain.core;
+package cozybrew.core;
 
 public interface TimerEngine {
     void setDurationSeconds(int seconds);

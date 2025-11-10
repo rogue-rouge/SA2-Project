@@ -1,6 +1,5 @@
-package testcontrolsmain.ui;
 
-import testcontrolsmain.core.TimerEngine;
+import cozybrew.core.TimerEngine;
 import testcontrolsmain.audio.AudioPlayer;
 
 import javax.swing.*;
