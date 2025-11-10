@@ -1,4 +1,4 @@
-package cozybrew.core;
+package cozybrew.logic;
 
 public interface TimerEngine {
     void setDurationSeconds(int seconds);
