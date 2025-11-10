@@ -6,7 +6,7 @@ package cozybrew.ui;
 
 /**
  *
- * @author Rosalie Joy Indelible Vicente
+ * @author Kirs Iguet
  */
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
