@@ -13,7 +13,7 @@ import java.util.Map;
  * It's based on the original ControlsPanel logic.
  */
 
-public class PresetsPanel extends RoundedPanel implements ActionListener {
+public class PresetsPanel extends RoundedPanel {
     
     private final TimerEngine timer;
     private Map<String, Integer> presets;
