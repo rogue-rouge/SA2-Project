@@ -1,5 +1,5 @@
-
-import cozybrew.core.TimerEngine;
+package cozybrew.ui;
+import cozybrew.logic.TimerEngine;
 import testcontrolsmain.audio.AudioPlayer;
 
 import javax.swing.*;
