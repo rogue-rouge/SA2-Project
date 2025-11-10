@@ -49,7 +49,8 @@ public class AssetLoader {
         for (int i = 0; i < frameNames.length; i++) {
             String path = "/resources/img/" + frameNames[i];
             try {
-                this.animationFrames[i] = new ImageIcon(getClass().getResource(path));
+                ImageIcon originalIcon = new ImageIcon(getClass().getResource(path));
+                this.animationFrames[i] = scaleIcon(originalIcon, 200, 200);
             } catch (Exception e) {
                 System.err.println("Failed to load animation frame: " + path);
                 this.animationFrames[i] = createPlaceholderIcon("Failed: " + frameNames[i], 100, 100);
