@@ -35,28 +35,12 @@ public class PresetsPanel extends RoundedPanel implements ActionListener {
             presets.put("45 Min", 45 * 60);
             presets.put("1 Hour", 60 * 60);
       
-            for (String key : presets.keySet()) {
-                  JButton btn = new JButton(key);
-                  styleButton(btn);
-                  btn.addActionListener(this); 
-                  add(btn);
-            }
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String command = e.getActionCommand();
-        if (presets.containsKey(command)) {
-            timer.setDurationSeconds(presets.get(command));
+            for (final Map.Entry<String, Integer> entry : presets.entrySet()) {
+            JButton btn = new RoundedButton(entry.getKey());
+            btn.addActionListener(e -> {
+                timer.setDurationSeconds(entry.getValue());
+            });
+            add(btn);
         }
-    }
-
-    private void styleButton(JButton btn) {
-        btn.setFont(new Font("Serif", Font.BOLD, 18));
-        btn.setForeground(new Color(240, 230, 220)); 
-        btn.setBackground(new Color(139, 90, 43)); 
-        btn.setFocusPainted(false);
-        btn.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 }
