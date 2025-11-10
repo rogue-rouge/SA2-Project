@@ -6,46 +6,35 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class StartStopPanel extends RoundedPanel implements ActionListener {
+/**
+ * new panel for start stop
+ * It's based on ControlsPanel logic.
+ */
+public class StartStopPanel extends RoundedPanel {
 
     private final TimerEngine timer;
-    private JButton startBtn;
-    private JButton stopBtn;
 
     public StartStopPanel(TimerEngine timer) {
         super(40, new Color(101, 67, 33, 200)); 
         this.timer = timer;
 
         setLayout(new GridLayout(0, 1, 10, 10));
-        setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        setOpaque(false);
 
-        startBtn = new JButton("Start");
-        styleButton(startBtn);
-        startBtn.addActionListener(this);
-        add(startBtn);
+        setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+
+        JButton startBtn = new RoundedButton("Start");
+        JButton stopBtn = new RoundedButton("Stop");
         
-        stopBtn = new JButton("Stop");
-        styleButton(stopBtn);
-        stopBtn.addActionListener(this);
-        add(stopBtn);
-    }
-
-  @Override
-  public void actionPerformed(ActionEvent e) {
-        String command = e.getActionCommand();
-        if (command.equals("Start")) {
+        startBtn.addActionListener(e -> {
             timer.start();
-        } else if (command.equals("Stop")) {
+        });
+
+        stopBtn.addActionListener(e -> {
             timer.stop();
-        }
-    }
-    
-  private void styleButton(JButton btn) {
-        btn.setFont(new Font("Serif", Font.BOLD, 18));
-        btn.setForeground(new Color(240, 230, 220));
-        btn.setBackground(new Color(139, 90, 43));
-        btn.setFocusPainted(false);
-        btn.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        });
+
+        add(startBtn);
+        add(stopBtn);
     }
 }
