@@ -13,20 +13,15 @@ import cozybrew.audio.SoundEffectPlayer;
 import cozybrew.logic.TimerEngine;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-/**
- * new panel for start stop
- * It's based on ControlsPanel logic.
- */
 public class StartStopPanel extends RoundedPanel {
 
     private final TimerEngine timer;
     private final SoundEffectPlayer sfxPlayer;
 
     public StartStopPanel(TimerEngine timer, SoundEffectPlayer sfxPlayer) {
-        super();
+        super(40, new Color(139, 94, 56, 170));
+
         this.timer = timer;
         this.sfxPlayer = sfxPlayer;
 
