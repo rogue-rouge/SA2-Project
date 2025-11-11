@@ -9,6 +9,7 @@ package cozybrew.ui.panels;
  * @author GROUP 3: JOHANES KINNARD COTE, MACAYLE THERESE DANCEL, MARY KIRSTEN DANIELLE IGUET, NESTOR JOSH BACANI, & ROSALIE JOY VICENTE
  */
 
+import cozybrew.audio.SoundEffectPlayer;
 import cozybrew.logic.TimerEngine;
 import javax.swing.*;
 import java.awt.*;
@@ -22,24 +23,25 @@ import java.awt.event.ActionListener;
 public class StartStopPanel extends RoundedPanel {
 
     private final TimerEngine timer;
+    private final SoundEffectPlayer sfxPlayer;
 
-    public StartStopPanel(TimerEngine timer) {
-        super(40, new Color(101, 67, 33, 200)); 
+    public StartStopPanel(TimerEngine timer, SoundEffectPlayer sfxPlayer) {
+        super();
         this.timer = timer;
+        this.sfxPlayer = sfxPlayer;
 
-        setLayout(new GridLayout(0, 1, 10, 10));
-        setOpaque(false);
-
-        setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+        setLayout(new GridLayout(2, 1, 0, 15));
 
         JButton startBtn = new RoundedButton("Start");
         JButton stopBtn = new RoundedButton("Stop");
-        
+
         startBtn.addActionListener(e -> {
+            sfxPlayer.playSound("click");
             timer.start();
         });
 
         stopBtn.addActionListener(e -> {
+            sfxPlayer.playSound("click");
             timer.stop();
         });
 
