@@ -24,31 +24,27 @@ public class MainFrame extends JFrame {
     public MainFrame() {
         super("CozyBrew Timer");
 
-        // Audio Player
         this.bgmPlayer = new AudioPlayer("/resources/audio/lofi.wav");
-        
-        // SFX Player
         this.sfxPlayer = new SoundEffectPlayer();
+
         this.brewPanel = new BrewPanel(sfxPlayer);
         
-        // Panel Setup
-        brewPanel.setPreferredSize(new Dimension(960, 540));
         this.setContentPane(brewPanel);
-        
-        // Connect to Sugar Cube
+
         JButton sugarCube = brewPanel.getSugarCubeButton();
         sugarCube.addActionListener(e -> {
-            sfxPlayer.playSound("click"); 
+            sfxPlayer.playSound("click");
             bgmPlayer.toggleLoop();
         });
-        // Auto Start Music
-        bgmPlayer.toggleLoop(); // Start playing on launch
+        
+        bgmPlayer.toggleLoop(); 
 
-        // Frame Setup
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
-        this.setContentPane(brewPanel);
         this.setResizable(false);
+        
+        this.setSize(960, 540); 
+
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
 }
