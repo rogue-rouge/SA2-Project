@@ -13,16 +13,31 @@ import javax.swing.*;
 import java.awt.*;
 
 public class AnimationDisplayPanel extends RoundedPanel {
-    
-    public AnimationDisplayPanel(JLabel animationLabel) {
-        super(40, new Color(101, 67, 33, 200));
+
+    private JLabel animationIconLabel;
+    private JLabel timerTextLabel;
+
+    /**
+     * Creates the center display panel.
+     * @param animationIconLabel The label that holds the animation icon.
+     * @param timerTextLabel The label that holds the timer countdown text.
+     */
+    public AnimationDisplayPanel(JLabel animationIconLabel, JLabel timerTextLabel) {
+        super(30, new Color(139, 94, 56, 120));
+
+        this.animationIconLabel = animationIconLabel;
+        this.timerTextLabel = timerTextLabel;
 
         setLayout(new BorderLayout());
-        setOpaque(false); 
         
-        animationLabel.setVerticalTextPosition(SwingConstants.BOTTOM);
-        animationLabel.setHorizontalTextPosition(SwingConstants.CENTER);
-        
-        add(animationLabel, BorderLayout.CENTER);
-      }
+        animationIconLabel.setVerticalAlignment(SwingConstants.CENTER);
+        animationIconLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        add(animationIconLabel, BorderLayout.CENTER);
+
+        timerTextLabel.setVerticalAlignment(SwingConstants.TOP);
+        timerTextLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+        timerTextLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
+        add(timerTextLabel, BorderLayout.SOUTH);
+    }
 }
