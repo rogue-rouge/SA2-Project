@@ -9,29 +9,28 @@ package cozybrew.ui;
  * @author GROUP 3: JOHANES KINNARD COTE, MACAYLE THERESE DANCEL, MARY KIRSTEN DANIELLE IGUET, NESTOR JOSH BACANI, & ROSALIE JOY VICENTE
  */
 
-import javax.swing.*;
-import java.awt.*;
 import cozybrew.audio.SoundEffectPlayer;
 import cozybrew.logic.TimerEngine;
 import cozybrew.logic.TimerLogic;
 import cozybrew.ui.panels.PresetsPanel;
 import cozybrew.ui.panels.StartStopPanel;
 import cozybrew.ui.panels.AnimationDisplayPanel;
+import javax.swing.*;
+import java.awt.*;
 
 public class BrewPanel extends JPanel {
+
     private JLabel animationIconLabel;
     private JLabel timerTextLabel;
     private JButton sugarCubeButton;
-    
     private TimerEngine timerEngine;
     private AnimationController animationController;
     private AssetLoader assetLoader;
-    
     private PresetsPanel presetsPanel;
     private StartStopPanel startStopPanel;
     private AnimationDisplayPanel animationDisplayPanel;
 
-public BrewPanel(SoundEffectPlayer sfxPlayer) {
+    public BrewPanel(SoundEffectPlayer sfxPlayer) {
         this.setLayout(null);
         this.assetLoader = new AssetLoader();
 
@@ -41,78 +40,59 @@ public BrewPanel(SoundEffectPlayer sfxPlayer) {
         this.timerTextLabel.setFont(new Font("Serif", Font.PLAIN, 22));
         this.timerTextLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        // Controllers
+        // --- Controllers ---
         this.animationController = new AnimationController(
-            this.brewingAnimationLabel,
+            this.animationIconLabel,
             assetLoader.getAnimationFrames()
         );
-
-        // Pass sfxPlayer to TimerLogic
+        
         this.timerEngine = new TimerLogic(
             this.timerTextLabel,
             this.animationController,
             sfxPlayer
         );
 
-        // Label controlled by Logic
-        this.brewingAnimationLabel = new JLabel();
-        this.brewingAnimationLabel.setForeground(Color.WHITE);
-        this.brewingAnimationLabel.setFont(new Font("Serif", Font.PLAIN, 20));
-        this.brewingAnimationLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        
-        // Store TimerLogic as the TimerEngine interface
-        this.timerEngine = new TimerLogic( 
-            this.brewingAnimationLabel,
-            this.animationController
-        );
-
-        // Center animation panel
-        this.animationDisplayPanel = new AnimationDisplayPanel(brewingAnimationLabel);
-        this.animationDisplayPanel.setBounds(330, 100, 300, 350);
+        // --- Center animation panel ---
+        this.animationDisplayPanel = new AnimationDisplayPanel(animationIconLabel, timerTextLabel);
+        this.animationDisplayPanel.setBounds(330, 130, 300, 280);
         this.add(animationDisplayPanel);
         
-        // Left presets panel
+        // --- Side panels ---
         this.presetsPanel = new PresetsPanel(timerEngine, sfxPlayer);
-        this.presetsPanel.setBounds(70, 60, 180, 400);
+        this.presetsPanel.setBounds(70, 60, 180, 420);
         this.add(presetsPanel);
 
-        // Right start/stop panel
         this.startStopPanel = new StartStopPanel(timerEngine, sfxPlayer);
-        this.startStopPanel.setBounds(710, 180, 180, 150);
+        this.startStopPanel.setBounds(710, 160, 180, 180);
         this.add(startStopPanel);
 
-        // Bottom-right sugar cube button
+        // --- Sugar cube button ---
         sugarCubeButton = new JButton();
         sugarCubeButton.setIcon(assetLoader.getSugarCubeIcon());
         sugarCubeButton.setFocusPainted(false);
         sugarCubeButton.setContentAreaFilled(false);
         sugarCubeButton.setBorderPainted(false);
         sugarCubeButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        sugarCubeButton.setBounds(826, 406, 64, 84);
+        sugarCubeButton.setBounds(820, 430, 64, 64);
         this.add(sugarCubeButton);
     }
 
-    // Getters
+    // --- Getters (unchanged) ---
     public TimerEngine getTimerEngine() {
         return this.timerEngine;
     }
-
-    // Getter for audio
     public JButton getSugarCubeButton() {
         return this.sugarCubeButton;
     }
 
+    // --- paintComponent (unchanged) ---
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        
         Image bgImage = assetLoader.getBackgroundImage();
-
         if (bgImage != null) {
-            // Draws the background image to fill the panel
             g.drawImage(bgImage, 0, 0, getWidth(), getHeight(), this);
-        }  else {
-            // Fallback: Draws a cozy gradient if the image failed to load
+        } else {
             Graphics2D g2d = (Graphics2D) g;
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             Color fallOrange = new Color(200, 100, 0);
