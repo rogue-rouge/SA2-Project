@@ -30,30 +30,31 @@ public class BrewPanel extends JPanel {
     private StartStopPanel startStopPanel;
     private AnimationDisplayPanel animationDisplayPanel;
 
+
     public BrewPanel(SoundEffectPlayer sfxPlayer) {
         this.setLayout(null);
         this.assetLoader = new AssetLoader();
 
-        this.animationIconLabel = new JLabel();
-        this.timerTextLabel = new JLabel();
+        this.animationIconLabel = new JLabel(); 
+        this.timerTextLabel = new JLabel(); 
         this.timerTextLabel.setForeground(Color.WHITE);
         this.timerTextLabel.setFont(new Font("Serif", Font.PLAIN, 22));
         this.timerTextLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         // --- Controllers ---
         this.animationController = new AnimationController(
-            this.animationIconLabel,
+            this.animationIconLabel, 
             assetLoader.getAnimationFrames()
         );
         
         this.timerEngine = new TimerLogic(
-            this.timerTextLabel,
+            this.timerTextLabel, 
             this.animationController,
             sfxPlayer
         );
 
         // --- Center animation panel ---
-        this.animationDisplayPanel = new AnimationDisplayPanel(animationIconLabel, timerTextLabel);
+        this.animationDisplayPanel = new AnimationDisplayPanel(animationIconLabel, timerTextLabel); 
         this.animationDisplayPanel.setBounds(330, 130, 300, 280);
         this.add(animationDisplayPanel);
         
@@ -77,7 +78,6 @@ public class BrewPanel extends JPanel {
         this.add(sugarCubeButton);
     }
 
-    // --- Getters (unchanged) ---
     public TimerEngine getTimerEngine() {
         return this.timerEngine;
     }
@@ -85,7 +85,6 @@ public class BrewPanel extends JPanel {
         return this.sugarCubeButton;
     }
 
-    // --- paintComponent (unchanged) ---
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -101,5 +100,10 @@ public class BrewPanel extends JPanel {
             g2d.setPaint(gp);
             g2d.fillRect(0, 0, getWidth(), getHeight());
         }
+    }
+
+    @Override
+    public Dimension getPreferredSize() {
+        return new Dimension(960, 540);
     }
 }
