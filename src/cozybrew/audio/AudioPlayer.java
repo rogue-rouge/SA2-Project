@@ -17,6 +17,7 @@ import java.net.URL;
  * A simple audio player for handling background music.
  * Loads a .wav file and can toggle it on (looping) and off (stop).
  */
+
 public class AudioPlayer {
 
     private Clip clip;
@@ -26,6 +27,7 @@ public class AudioPlayer {
      * Loads the audio clip from the given resource path.
      * @param resourcePath The path to the audio file (e.g., "/resources/audio/lofi.wav")
      */
+    
     public AudioPlayer(String resourcePath) {
         try {
             URL audioUrl = getClass().getResource(resourcePath);

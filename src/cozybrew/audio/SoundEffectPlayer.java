@@ -8,6 +8,7 @@ package cozybrew.audio;
  *
  * @author GROUP 3: JOHANES KINNARD COTE, MACAYLE THERESE DANCEL, MARY KIRSTEN DANIELLE IGUET, NESTOR JOSH BACANI, & ROSALIE JOY VICENTE
  */
+
 import javax.sound.sampled.*;
 import java.io.IOException;
 import java.net.URL;
@@ -18,6 +19,7 @@ import java.util.Map;
  * Loads and plays short sound effects.
  * Sounds are pre-loaded into a Map for instant playback.
  */
+
 public class SoundEffectPlayer {
     private Map<String, Clip> soundClips;
 
@@ -32,6 +34,7 @@ public class SoundEffectPlayer {
      * @param name The simple name to refer to the sound (e.g., "click")
      * @param resourcePath The full path to the .wav file
      */
+    
     private void loadSound(String name, String resourcePath) {
         try {
             URL audioUrl = getClass().getResource(resourcePath);
