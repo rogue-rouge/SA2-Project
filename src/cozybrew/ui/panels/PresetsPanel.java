@@ -9,28 +9,21 @@ package cozybrew.ui.panels;
  * @author GROUP 3: JOHANES KINNARD COTE, MACAYLE THERESE DANCEL, MARY KIRSTEN DANIELLE IGUET, NESTOR JOSH BACANI, & ROSALIE JOY VICENTE
  */
 
-import cozybrew.audio.SoundEffectPlayer; 
+import cozybrew.audio.SoundEffectPlayer;
 import cozybrew.logic.TimerEngine;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * new panel for the presets
- * It's based on the original ControlsPanel logic.
- */
-
 public class PresetsPanel extends RoundedPanel {
-    
+
     private final TimerEngine timer;
     private final SoundEffectPlayer sfxPlayer;
-    private Map<String, Integer> presets;
 
     public PresetsPanel(TimerEngine timer, SoundEffectPlayer sfxPlayer) {
-        super();
+        super(40, new Color(139, 94, 56, 170));
+        
         this.timer = timer;
         this.sfxPlayer = sfxPlayer;
         
