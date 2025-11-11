@@ -19,14 +19,15 @@ import javax.swing.JButton;
  */
 public class RoundedButton extends JButton {
 
-    private Color baseColor = new Color(139, 94, 56, 200); // R:139 G:94 B:56, 80% opaque
-    private Color hoverColor = new Color(159, 114, 76, 200); // Slightly lighter for hover
-    private Color pressedColor = new Color(119, 74, 36, 200); // Slightly darker for pressed
+    private Color baseColor = new Color(139, 94, 56, 200);
+    private Color hoverColor = new Color(159, 114, 76, 200);
+    private Color pressedColor = new Color(119, 74, 36, 200);
+
     private int cornerRadius = 25;
 
-public RoundedButton(String text) {
+    public RoundedButton(String text) {
         super(text);
-        
+
         setContentAreaFilled(false);
         setFocusPainted(false);
         setBorderPainted(false);
@@ -35,7 +36,9 @@ public RoundedButton(String text) {
         setForeground(Color.WHITE);
         setFont(new Font("Serif", Font.BOLD, 16));
         
-        setPreferredSize(new Dimension(150, 45));
+        setPreferredSize(new Dimension(150, 40));
+        
+        setMaximumSize(new Dimension(150, 40));
     }
 
     @Override
@@ -52,10 +55,8 @@ public RoundedButton(String text) {
         }
         
         g2.fill(new RoundRectangle2D.Float(0, 0, getWidth(), getHeight(), cornerRadius, cornerRadius));
-
-        super.paintComponent(g);
         
+        super.paintComponent(g);
         g2.dispose();
     }
 }
-
