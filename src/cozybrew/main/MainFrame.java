@@ -5,6 +5,7 @@
 package cozybrew.main;
 
 import cozybrew.ui.BrewPanel;
+import cozybrew.audio.AudioPlayer; 
 import javax.swing.*;
 
 /**
@@ -15,13 +16,25 @@ import javax.swing.*;
 public class MainFrame extends JFrame {
 
     private BrewPanel brewPanel;
+    private AudioPlayer bgmPlayer;
 
     public MainFrame() {
         super("CozyBrew Timer");
 
         this.brewPanel = new BrewPanel();
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(960, 540); 
+        // Audio Player
+        this.bgmPlayer = new AudioPlayer("/resources/audio/lofi.wav");
+        // Connect to Sugar Cube
+        JButton sugarCube = brewPanel.getSugarCubeButton();
+        sugarCube.addActionListener(e -> {
+            bgmPlayer.toggleLoop();
+        });
+        // Auto Start Music
+        bgmPlayer.toggleLoop(); // Start playing on launch
+
+        // Frame Setup
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setContentPane(brewPanel);
         this.setResizable(false);
