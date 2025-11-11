@@ -8,6 +8,7 @@ import cozybrew.ui.BrewPanel;
 import cozybrew.audio.AudioPlayer;
 import cozybrew.audio.SoundEffectPlayer;
 import javax.swing.*;
+import java.awt.Dimension; 
 
 /**
  *
