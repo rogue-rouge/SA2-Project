@@ -41,7 +41,7 @@ public class AudioPlayer {
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             System.err.println("Error loading audio file: " + resourcePath);
             e.printStackTrace();
-            clip = null; // Ensure clip is null if loading failed
+            clip = null; 
         }
     }
 
@@ -55,11 +55,9 @@ public class AudioPlayer {
         }
 
         if (isPlaying) {
-            // If it's playing, stop it.
             clip.stop();
             isPlaying = false;
         } else {
-            // If it's stopped, loop it continuously.
             clip.loop(Clip.LOOP_CONTINUOUSLY);
             isPlaying = true;
         }
