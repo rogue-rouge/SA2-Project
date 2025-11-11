@@ -20,15 +20,24 @@ public class StartStopPanel extends RoundedPanel {
     private final SoundEffectPlayer sfxPlayer;
 
     public StartStopPanel(TimerEngine timer, SoundEffectPlayer sfxPlayer) {
-        super(40, new Color(139, 94, 56, 170));
+        super(30, new Color(139, 94, 56, 120));
 
         this.timer = timer;
         this.sfxPlayer = sfxPlayer;
+        
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        
+        setBorder(BorderFactory.createEmptyBorder(15, 0, 15, 0));
 
-        setLayout(new GridLayout(2, 1, 0, 15));
-
+        // --- Center-align all components ---
+        setAlignmentX(Component.CENTER_ALIGNMENT);
+        
         JButton startBtn = new RoundedButton("Start");
         JButton stopBtn = new RoundedButton("Stop");
+        
+        // --- Center the buttons ---
+        startBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        stopBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         startBtn.addActionListener(e -> {
             sfxPlayer.playSound("click");
@@ -40,7 +49,11 @@ public class StartStopPanel extends RoundedPanel {
             timer.stop();
         });
 
+        add(Box.createVerticalGlue());
         add(startBtn);
+
+        add(Box.createRigidArea(new Dimension(0, 15)));
         add(stopBtn);
+        add(Box.createVerticalGlue());
     }
 }
