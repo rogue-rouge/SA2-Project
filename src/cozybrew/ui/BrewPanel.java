@@ -11,6 +11,7 @@ package cozybrew.ui;
 
 import javax.swing.*;
 import java.awt.*;
+import cozybrew.audio.SoundEffectPlayer;
 import cozybrew.logic.TimerEngine;
 import cozybrew.logic.TimerLogic;
 import cozybrew.ui.panels.PresetsPanel;
@@ -18,32 +19,46 @@ import cozybrew.ui.panels.StartStopPanel;
 import cozybrew.ui.panels.AnimationDisplayPanel;
 
 public class BrewPanel extends JPanel {
-    private JLabel brewingAnimationLabel;
+    private JLabel animationIconLabel;
+    private JLabel timerTextLabel;
     private JButton sugarCubeButton;
-
+    
     private TimerEngine timerEngine;
     private AnimationController animationController;
     private AssetLoader assetLoader;
-
+    
     private PresetsPanel presetsPanel;
     private StartStopPanel startStopPanel;
     private AnimationDisplayPanel animationDisplayPanel;
 
-    public BrewPanel() {
+public BrewPanel(SoundEffectPlayer sfxPlayer) {
         this.setLayout(null);
         this.assetLoader = new AssetLoader();
 
-        // Label controlled by Logic
-        this.brewingAnimationLabel = new JLabel();
-        this.brewingAnimationLabel.setForeground(Color.WHITE);
-        this.brewingAnimationLabel.setFont(new Font("Serif", Font.PLAIN, 20));
-        this.brewingAnimationLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        this.animationIconLabel = new JLabel();
+        this.timerTextLabel = new JLabel();
+        this.timerTextLabel.setForeground(Color.WHITE);
+        this.timerTextLabel.setFont(new Font("Serif", Font.PLAIN, 22));
+        this.timerTextLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         // Controllers
         this.animationController = new AnimationController(
             this.brewingAnimationLabel,
             assetLoader.getAnimationFrames()
         );
+
+        // Pass sfxPlayer to TimerLogic
+        this.timerEngine = new TimerLogic(
+            this.timerTextLabel,
+            this.animationController,
+            sfxPlayer
+        );
+
+        // Label controlled by Logic
+        this.brewingAnimationLabel = new JLabel();
+        this.brewingAnimationLabel.setForeground(Color.WHITE);
+        this.brewingAnimationLabel.setFont(new Font("Serif", Font.PLAIN, 20));
+        this.brewingAnimationLabel.setHorizontalAlignment(SwingConstants.CENTER);
         
         // Store TimerLogic as the TimerEngine interface
         this.timerEngine = new TimerLogic( 
@@ -57,12 +72,12 @@ public class BrewPanel extends JPanel {
         this.add(animationDisplayPanel);
         
         // Left presets panel
-        this.presetsPanel = new PresetsPanel(timerEngine);
-        this.presetsPanel.setBounds(70, 70, 180, 400);
+        this.presetsPanel = new PresetsPanel(timerEngine, sfxPlayer);
+        this.presetsPanel.setBounds(70, 60, 180, 400);
         this.add(presetsPanel);
 
         // Right start/stop panel
-        this.startStopPanel = new StartStopPanel(timerEngine);
+        this.startStopPanel = new StartStopPanel(timerEngine, sfxPlayer);
         this.startStopPanel.setBounds(710, 180, 180, 150);
         this.add(startStopPanel);
 
