@@ -6,9 +6,10 @@ package cozybrew.logic;
 
 import javax.swing.*;
 import java.awt.event.*;
-import cozybrew.ui.AnimationController;
 import java.util.ArrayList;
 import java.util.List;
+import cozybrew.ui.AnimationController;
+import cozybrew.audio.SoundEffectPlayer;
 
 /**
  *
@@ -21,13 +22,15 @@ public class TimerLogic implements ActionListener, TimerEngine {
     private JLabel displayLabel;
     private Timer swingTimer;
     private AnimationController animationController;
+    private SoundEffectPlayer sfxPlayer;
     private boolean isRunning = false;
 
     private List<TimerListener> listeners = new ArrayList<>();
 
-    public TimerLogic(JLabel displayLabel, AnimationController animationController) {
+    public TimerLogic(JLabel displayLabel, AnimationController animationController, SoundEffectPlayer sfxPlayer) {
         this.displayLabel = displayLabel;
         this.animationController = animationController;
+        this.sfxPlayer = sfxPlayer;
         this.swingTimer = new Timer(1000, this);
         this.swingTimer.setRepeats(true);
         setToIdle();
@@ -44,22 +47,26 @@ public class TimerLogic implements ActionListener, TimerEngine {
 
     @Override
     public void start() {
-        if (remainingSeconds > 0 && !isRunning) {
-            isRunning = true; // Set running state
-            animationController.startAnimation(remainingSeconds);
-            swingTimer.start();
+        if (isRunning || initialDuration == 0) {
+            return;
         }
+        this.isRunning = true;
+        this.swingTimer.start();
+        this.animationController.startAnimation(this.initialDuration);
     }
+    
     @Override
     public void stop() {
-        if (isRunning) {
-            swingTimer.stop();
-            isRunning = false;
-            setToIdle(); 
-            for (TimerListener listener : listeners) {
-                listener.onFinish();
-            }
+        if (!isRunning) {
+            return; 
         }
+        this.isRunning = false;
+        this.swingTimer.stop();
+        
+        for (TimerListener listener : listeners) {
+            listener.onFinish();
+        }
+        setToIdle();
     }
 
     @Override
@@ -97,8 +104,9 @@ public class TimerLogic implements ActionListener, TimerEngine {
     }
 
     private void timerFinished() {
+        sfxPlayer.playSound("ding");
         animationController.setComplete();
-        displayLabel.setText("Brewing Complete! ☕️");
+        displayLabel.setText("<html><div style='text-align: center;'>Brewing Complete! ☕️</div></html>");
 
         SwingUtilities.invokeLater(() -> {
             JOptionPane.showMessageDialog(
@@ -107,6 +115,7 @@ public class TimerLogic implements ActionListener, TimerEngine {
                 "Timer Finished",
                 JOptionPane.INFORMATION_MESSAGE
             );
+            setToIdle();
         });
     }
 
